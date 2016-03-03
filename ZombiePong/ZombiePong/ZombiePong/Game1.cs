@@ -105,8 +105,21 @@ namespace ZombiePong
             paddle2.Location = new Vector2(paddle2.Location.X, ball.Center.Y - 90);
             if (ball.Location.Y > 750 - 16 || ball.Location.Y < 0 + 5)
                 ball.Velocity = ball.Velocity * new Vector2(1, -1);
-            if (ball.Location.X > 950 - 16 || ball.Location.X < 0 + 20)
+            //if (ball.Location.X > 950 - 16 || ball.Location.X < 0 + 20)
+            //    ball.Velocity = ball.Velocity * new Vector2(-1, 1);
+
+            if (ball.BoundingBoxRect.Left < paddle1.BoundingBoxRect.Right && 
+                ball.BoundingBoxRect.Bottom < paddle1.BoundingBoxRect.Top &&
+                ball.BoundingBoxRect.Top > paddle1.BoundingBoxRect.Bottom
+                )
                 ball.Velocity = ball.Velocity * new Vector2(-1, 1);
+
+            if (ball.BoundingBoxRect.Left < paddle2.BoundingBoxRect.Right &&
+                ball.BoundingBoxRect.Bottom < paddle2.BoundingBoxRect.Top &&
+                ball.BoundingBoxRect.Top > paddle2.BoundingBoxRect.Bottom
+                )
+                ball.Velocity = ball.Velocity * new Vector2(-1, 1);
+
 
             for (int i = 0; i < zombies.Count; i++)
             {
